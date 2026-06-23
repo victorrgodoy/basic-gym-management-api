@@ -1,1 +1,24 @@
 .venv/
+.env
+.DS_Store
+
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.Python
+
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.Python
+
+.vscode/
+.idea/
+*.swp
+
+# build/egg-info
+*.egg-info/
+dist/
+build/
