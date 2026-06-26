@@ -1,10 +1,13 @@
+from __future__ import annotations
+from typing import TYPE_CHECKING
+if TYPE_CHECKING:
+    from app.domain.aluno import Aluno
 import uuid
 from datetime import date  
 from sqlalchemy import Boolean, Date, ForeignKey 
 from sqlalchemy.dialects.postgresql import UUID
 from sqlalchemy.orm import Mapped, mapped_column, relationship 
 from app.config.database import Base  
-from app.domain.aluno import Aluno
 
 class Matricula(Base):  
     __tablename__ = "matricula"
@@ -14,7 +17,7 @@ class Matricula(Base):
     ativo: Mapped[bool] = mapped_column(Boolean, nullable=False, default=True)
     aluno_id: Mapped[uuid.UUID] = mapped_column(UUID(as_uuid=True), ForeignKey("aluno.id"), nullable=False)
 
-    aluno: Mapped[Aluno] = relationship("Aluno", back_populates="matriculas")
+    aluno: Mapped[Aluno] = relationship("Aluno",back_populates="matriculas")
     
     def desativar_matricula(self) -> None:
         if not self.ativo:
