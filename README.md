@@ -20,6 +20,7 @@ pip install --upgrade pip
 pip install -r requirements.txt
 ```
 
+
 ### 3. Configurar variáveis de ambiente
 Crie um arquivo `.env` na raiz do projeto:
 ```env
