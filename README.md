@@ -20,7 +20,6 @@ pip install --upgrade pip
 pip install -r requirements.txt
 ```
 
-
 ### 3. Configurar variáveis de ambiente
 Crie um arquivo `.env` na raiz do projeto:
 ```env
@@ -33,7 +32,7 @@ DATABASE_PORT=5432
 
 ### 4. Subir o banco de dados
 ```bash
-docker compose up -d
+docker-compose up -d
 ```
 
 ### 5. Rodar as migrations
