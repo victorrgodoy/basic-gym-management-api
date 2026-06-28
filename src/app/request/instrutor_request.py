@@ -1,6 +1,14 @@
 from pydantic import field_validator
 from app.request.usuario_request import UsuarioBaseRequest
+from pydantic import BaseModel, EmailStr
+from typing import Optional
 
+class InstrutorUpdate(BaseModel):
+    nome: str
+    email: EmailStr
+    senha: Optional[str] = None
+    cref: str
+    
 class InstrutorRequest(UsuarioBaseRequest):
     cref: str
 

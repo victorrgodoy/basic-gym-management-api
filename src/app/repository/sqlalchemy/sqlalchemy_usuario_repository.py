@@ -1,5 +1,5 @@
 import uuid
-from typing import Optional
+from typing import Optional, List
 from sqlalchemy.orm import Session
 from app.repository.usuario_repository import UsuarioRepository
 from app.domain.usuario import Usuario 
@@ -37,3 +37,9 @@ class SqlAlchemyUsuarioRepository(UsuarioRepository):
         if usuario:
             self.__db.delete(usuario)
             self.__db.commit()
+
+    def get_by_id(self, id: UUID) -> Optional[Usuario]:
+        return self.__db.query(Usuario).filter(Usuario.id == id).first()
+    
+    def commit(self) -> None:
+        self.__db.commit()
