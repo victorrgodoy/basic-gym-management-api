@@ -8,6 +8,7 @@ from app.domain.usuario import Usuario
 from app.domain.aluno import Aluno
 from app.domain.instrutor import Instrutor
 from app.domain.matricula import Matricula
+from app.domain.administrador import Administrador
 
 config = context.config
 
