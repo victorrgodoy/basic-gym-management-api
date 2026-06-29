@@ -4,6 +4,9 @@ from typing import Optional
 from app.domain.aluno import Aluno
 
 class AlunoRepository(ABC):
+    @abstractmethod
+    def find_by_id(self, id: uuid.UUID) -> Optional[Aluno]:
+        pass
 
     @abstractmethod
     def find_by_cpf(self, cpf: str) -> Optional[Aluno]: 

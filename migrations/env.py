@@ -13,6 +13,10 @@ from app.domain.matricula import Matricula
 from app.domain.administrador import Administrador
 
 load_dotenv()
+from app.domain.exercicio import Exercicio
+from app.domain.ficha_treino import FichaTreino
+from app.domain.item_treino import ItemTreino
+
 
 config = context.config
 

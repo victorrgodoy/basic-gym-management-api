@@ -30,18 +30,9 @@ class UsuarioService:
         return self.__usuario_repository.read(tipo=tipo)
     
     def update(self, usuario: Usuario) -> Usuario:
-        if usuario is None:
-            raise ValueError("Usuário não pode ser nulo.")
-        
-        usuario_banco = self.find_by_id(usuario.id)
-        if not usuario_banco:
+        if not self.find_by_id(usuario.id):
             raise ValueError("Usuário não encontrado.")
-        
-        usuario_banco.alterar_nome(usuario.nome)
-        usuario_banco.alterar_email(usuario.email)
-        usuario_banco.alterar_senha(usuario.senha)
-
-        return self.__usuario_repository.update(usuario_banco)
+        return self.__usuario_repository.update(usuario)
     
     def delete(self, id: uuid.UUID) -> None:
         if not id:
