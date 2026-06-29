@@ -19,6 +19,11 @@ class Aluno(Usuario):
     telefone: Mapped[str] = mapped_column(String(15), nullable=False)
     
     matriculas: Mapped[list[Matricula]] = relationship("Matricula",back_populates="aluno")
+    
+    fichas_treino: Mapped[list["FichaTreino"]] = relationship(
+        "FichaTreino",
+        back_populates="aluno"
+    )
 
     __mapper_args__ = {
         "polymorphic_identity": TipoUsuario.ALUNO
