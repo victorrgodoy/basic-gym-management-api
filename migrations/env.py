@@ -1,3 +1,5 @@
+import os
+from dotenv import load_dotenv
 from logging.config import fileConfig
 from sqlalchemy import engine_from_config
 from sqlalchemy import pool
@@ -10,6 +12,8 @@ from app.domain.instrutor import Instrutor
 from app.domain.matricula import Matricula
 from app.domain.administrador import Administrador
 
+load_dotenv()
+
 config = context.config
 
 if config.config_file_name is not None:
@@ -18,6 +22,13 @@ if config.config_file_name is not None:
 target_metadata = Base.metadata 
 
 def run_migrations_offline() -> None:
+    config.set_main_option("sqlalchemy.url", os.getenv("DATABASE_URL"))
+
+    connectable = engine_from_config(
+        config.get_section(config.config_ini_section, {}),
+        prefix="sqlalchemy.",
+        poolclass=pool.NullPool,
+    )
     """Run migrations in 'offline' mode."""
     url = DATABASE_URL 
     context.configure(
