@@ -31,15 +31,18 @@ class AlunoService:
         return self.__aluno_repository.read()
 
     def update(self, aluno_id: uuid.UUID, dados) -> Aluno:
-        usuario = self.__usuario_service.find_by_id(aluno_id)
-        if not usuario:
+        aluno = self.__aluno_repository.find_by_id(aluno_id)
+        if not aluno:
             raise ValueError("Aluno não encontrado.")
-        usuario.alterar_telefone(dados.telefone)
-        usuario.alterar_nome(dados.nome)
-        usuario.alterar_email(dados.email)
-        usuario.alterar_senha(dados.senha)
-        return self.__usuario_service.update(usuario)
+        if dados.telefone is not None:
+            aluno.alterar_telefone(dados.telefone)
+        if dados.nome is not None:
+            aluno.alterar_nome(dados.nome)
+        if dados.email is not None:
+            aluno.alterar_email(dados.email)
+        if dados.senha is not None:
+            aluno.alterar_senha(dados.senha)
+        return self.__usuario_service.update(aluno)
     
     def delete(self, aluno_id: uuid.UUID) -> None:
-        usuario = self.__usuario_service.find_by_id(aluno_id)
         self.__usuario_service.delete(aluno_id)

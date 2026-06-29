@@ -1,4 +1,14 @@
 # Basic Gym Management API
+Esta API foi desenvolvida para gerenciar o fluxo operacional de uma academia, cobrindo desde o controle de acessos (Alunos, Instrutores, Admins) até o mapeamento de treinos e check-ins.
+
+## Modelo de Domínio
+
+O design da arquitetura e o relacionamento entre as entidades seguem o diagrama de classes mapeado em:
+> `docs/modelo.jpeg`
+
+---
+
+## Rodar o projeto
 
 ## Requisitos
 - Python 3.9+
@@ -21,14 +31,7 @@ pip install -r requirements.txt
 ```
 
 ### 3. Configurar variáveis de ambiente
-Crie um arquivo `.env` na raiz do projeto:
-```env
-DATABASE_USER=user
-DATABASE_PASSWORD=password
-DATABASE_NAME=basic_gym_management
-DATABASE_HOST=localhost
-DATABASE_PORT=5432
-```
+Crie um arquivo `.env` na raiz do projeto com base .env.example:
 
 ### 4. Subir o banco de dados
 ```bash
