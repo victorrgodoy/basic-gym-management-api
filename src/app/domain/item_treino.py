@@ -5,6 +5,7 @@ from sqlalchemy.dialects.postgresql import UUID
 from sqlalchemy.orm import Mapped, mapped_column, relationship
 
 from app.config.database import Base
+from typing import Optional
 
 
 class ItemTreino(Base):
@@ -28,7 +29,7 @@ class ItemTreino(Base):
 
     repeticoes: Mapped[int] = mapped_column(nullable=False)
 
-    observacao: Mapped[str | None] = mapped_column(
+    observacao: Mapped[Optional[str]] = mapped_column(
         String(500),
         nullable=True
     )
@@ -59,7 +60,7 @@ class ItemTreino(Base):
         self,
         series: int,
         repeticoes: int,
-        observacao: str | None = None
+        observacao: Optional[str] = None
     ) -> None:
         if series <= 0:
             raise ValueError("A quantidade de séries deve ser maior que zero.")
