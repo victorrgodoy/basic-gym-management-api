@@ -32,11 +32,21 @@ class Exercicio(Base):
         back_populates="exercicio"
     )
 
+    def alterar_nome(self, novo_nome:str) -> None:
+        if not novo_nome or not novo_nome.strip():
+            raise ValueError("O nome do exercício não pode ser vazio.")
+        
+        if len(novo_nome.strip()) > 100:
+            raise ValueError("O nome do exerício não pode ter mais de 100 caracteres.")
+    
+        self.nome = novo_nome.strip()
+
+
     def alterar_descricao(self, nova_descricao: str) -> None:
         if not nova_descricao or not nova_descricao.strip():
             raise ValueError("A descrição do exercício não pode ser vazia.")
 
-        if len(nova_descricao) > 500:
+        if len(nova_descricao.strip()) > 500:
             raise ValueError("A descrição não pode ter mais de 500 caracteres.")
 
         self.descricao = nova_descricao.strip()
