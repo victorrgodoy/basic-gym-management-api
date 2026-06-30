@@ -8,7 +8,7 @@
 
 ### 1. Clonar o projeto
 ```bash
-git clone <url-do-repo>
+git clone https://github.com/victorrgodoy/basic-gym-management-api.git
 cd basic-gym-management-api
 ```
 
@@ -28,7 +28,7 @@ DATABASE_USER=user
 DATABASE_PASSWORD=password
 DATABASE_NAME=basic_gym_management
 DATABASE_HOST=localhost
-DATABASE_PORT=5432
+DATABASE_PORT=5433
 ```
 
 ### 4. Subir o banco de dados
