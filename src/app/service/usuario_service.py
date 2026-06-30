@@ -3,7 +3,7 @@ import uuid
 from app.domain.usuario import Usuario
 from typing import Optional
 from app.request.administrador_request import AdministradorUpdate
-from app.request.instrutor_request import InstrutorUpdate
+from app.request.instrutor_request import InstrutorUpdateRequest
 
 class UsuarioService:
     def __init__(self, usuario_repository: UsuarioRepository):
