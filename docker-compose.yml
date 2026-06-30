@@ -7,7 +7,7 @@ services:
       POSTGRES_USER: ${DATABASE_USER}
       POSTGRES_DB: ${DATABASE_NAME}
     ports:
-      - '5433:5432'
+      - '5432:5432'
     volumes:
       - basic_gym_data:/var/lib/postgresql/data
     healthcheck:
