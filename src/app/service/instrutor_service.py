@@ -29,3 +29,18 @@ class InstrutorService:
 
     def read(self):
         return self.__instrutor_repository.read()
+    
+    def update(self, instrutor_id: uuid.UUID, dados) -> Instrutor:
+        instrutor = self.__instrutor_repository.find_by_id(instrutor_id)
+        if not instrutor:
+            raise ValueError("Instrutor não encontrado.")
+        if dados.nome is not None:
+            instrutor.alterar_nome(dados.nome)
+        if dados.email is not None:
+            instrutor.alterar_email(dados.email)
+        if dados.senha is not None:
+            instrutor.alterar_senha(dados.senha)
+        return self.__usuario_service.update(instrutor)
+
+    def delete(self, instrutor_id: uuid.UUID) -> None:
+        self.__usuario_service.delete(instrutor_id)
