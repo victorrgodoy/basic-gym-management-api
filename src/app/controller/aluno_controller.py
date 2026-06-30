@@ -7,7 +7,6 @@ from app.service.usuario_service import UsuarioService
 from app.repository.sqlalchemy.sqlalchemy_aluno_repository import SqlAlchemyAlunoRepository
 from app.service.aluno_service import AlunoService
 from app.domain.aluno import Aluno
-from app.domain.usuario import TipoUsuario
 from app.request.aluno_request import AlunoCreateRequest, AlunoUpdateRequest
 
 router = APIRouter(prefix="/alunos", tags=["Alunos"])
@@ -18,14 +17,13 @@ def get_aluno_service(db: Session = Depends(get_db)):
         UsuarioService(SqlAlchemyUsuarioRepository(db))
     )
 
-@router.post("/")
+@router.post("/", status_code=201)
 def create(request: AlunoCreateRequest, service: AlunoService = Depends(get_aluno_service)):
     try:
         novo_aluno = Aluno(
             nome=request.nome,
             email=request.email,
             senha=request.senha,
-            tipo=TipoUsuario.ALUNO,
             cpf=request.cpf,
             telefone=request.telefone
         )
