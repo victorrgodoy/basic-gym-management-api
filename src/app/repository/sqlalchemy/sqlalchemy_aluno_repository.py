@@ -8,8 +8,8 @@ class SqlAlchemyAlunoRepository(AlunoRepository):
     def __init__(self, db: Session):
         self.__db = db
 
-    def find_by_id(self, id: uuid.UUID) -> Optional[Aluno]:
-        return self.__db.query(Aluno).filter(Aluno.id == id).first()
+    def find_by_id(self, aluno_id: uuid.UUID) -> Optional[Aluno]:
+        return self.__db.get(Aluno, aluno_id)
     
     def find_by_cpf(self, cpf: str) -> Optional[Aluno]: 
         return self.__db.query(Aluno).filter(Aluno.cpf == cpf).first()
