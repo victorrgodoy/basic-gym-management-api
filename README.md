@@ -23,11 +23,11 @@ pip install -r requirements.txt
 
 ### 3. Configurar variáveis de ambiente
 Crie um arquivo `.env` na raiz do projeto:
-```env
-Linux, macOS ou Windows (PowerShell): cp .env.example .env
+```env```
+Linux, macOS ou Windows (PowerShell): ```bash cp .env.example .env ```
 
-Windows (Prompt de Comando - CMD): copy .env.example .env
-```
+Windows (Prompt de Comando - CMD): ```bash copy .env.example .env```
+
 
 ### 4. Subir o banco de dados
 ```bash
