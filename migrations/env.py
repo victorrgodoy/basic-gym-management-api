@@ -14,6 +14,7 @@ from app.domain.administrador import Administrador
 from app.domain.exercicio import Exercicio
 from app.domain.ficha_treino import FichaTreino
 from app.domain.item_treino import ItemTreino
+from app.domain.check_in import CheckIn
 
 load_dotenv()
 config = context.config

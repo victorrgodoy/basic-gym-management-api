@@ -22,7 +22,7 @@ from app.request.item_treino_request import (
 from app.service.item_treino_service import ItemTreinoService
 
 
-router = APIRouter(tags=["Itens de Treino"])
+router = APIRouter(prefix="/itens-treino", tags=["Itens de Treino"])
 
 
 def get_item_treino_service(

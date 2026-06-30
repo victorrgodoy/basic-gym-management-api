@@ -9,6 +9,7 @@ from app.controller.check_in_controller import router as check_in_router
 from app.controller.ficha_treino_controller import router as ficha_treino_router
 from app.controller.item_treino_controller import router as item_treino_router
 from app.controller.matricula_controller import router as matricula_router
+from app.controller.dashboard_controller import router as dashboard_router
 
 
 app = FastAPI(title="Basic Gym Management API")
@@ -21,3 +22,4 @@ app.include_router(check_in_router)
 app.include_router(ficha_treino_router)
 app.include_router(item_treino_router)
 app.include_router(matricula_router)
+app.include_router(dashboard_router)

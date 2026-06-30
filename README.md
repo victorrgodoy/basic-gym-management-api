@@ -43,7 +43,13 @@ docker-compose up -d
 alembic upgrade head
 ```
 
-### 6. Iniciar o servidor
+### 6. Popular o banco com dados iniciais
+```bash
+python3 src/seed.py
+```
+Esse comando limpa os dados existentes das tabelas da aplicação e recria os registros de exemplo.
+
+### 7. Iniciar o servidor
 ```bash
 uvicorn src.main:app --reload
 ```
