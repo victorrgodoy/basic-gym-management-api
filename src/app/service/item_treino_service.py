@@ -47,10 +47,10 @@ class ItemTreinoService:
     def update(
         self,
         item_treino_id: uuid.UUID,
-        exercicio_id: uuid.UUID | None = None,
-        series: int | None = None,
-        repeticoes: int | None = None,
-        observacao: str | None = None,
+        exercicio_id: Optional[uuid.UUID] = None,
+        series: Optional[int] = None,
+        repeticoes: Optional[int] = None,
+        observacao: Optional[str] = None,
         atualizar_observacao: bool = False
     ) -> ItemTreino:
         item_treino = self.find_by_id(item_treino_id)

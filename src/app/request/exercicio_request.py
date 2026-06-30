@@ -1,6 +1,7 @@
 import uuid
 
 from pydantic import BaseModel, ConfigDict, field_validator, model_validator
+from typing import Optional
 
 
 class ExercicioCreateRequest(BaseModel):
@@ -35,12 +36,12 @@ class ExercicioCreateRequest(BaseModel):
 
 
 class ExercicioUpdateRequest(BaseModel):
-    nome: str | None = None
-    descricao: str | None = None
+    nome: Optional[str] = None
+    descricao: Optional[str] = None
 
     @field_validator("nome")
     @classmethod
-    def validar_nome(cls, value: str | None) -> str | None:
+    def validar_nome(cls, value: Optional[str]) -> Optional[str]:
         if value is None:
             return value
 
@@ -56,7 +57,7 @@ class ExercicioUpdateRequest(BaseModel):
 
     @field_validator("descricao")
     @classmethod
-    def validar_descricao(cls, value: str | None) -> str | None:
+    def validar_descricao(cls, value: Optional[str]) -> Optional[str]:
         if value is None:
             return value
 

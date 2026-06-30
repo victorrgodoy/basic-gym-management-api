@@ -1,4 +1,5 @@
 import uuid
+from typing import Optional
 
 from pydantic import (
     BaseModel,
@@ -13,11 +14,11 @@ class ItemTreinoCreateRequest(BaseModel):
     exercicio_id: uuid.UUID
     series: int = Field(gt=0)
     repeticoes: int = Field(gt=0)
-    observacao: str | None = None
+    observacao: Optional[str] = None
 
     @field_validator("observacao")
     @classmethod
-    def validar_observacao(cls, value: str | None) -> str | None:
+    def validar_observacao(cls, value: Optional[str]) -> Optional[str]:
         if value is None:
             return None
 
@@ -35,14 +36,14 @@ class ItemTreinoCreateRequest(BaseModel):
 
 
 class ItemTreinoUpdateRequest(BaseModel):
-    exercicio_id: uuid.UUID | None = None
-    series: int | None = Field(default=None, gt=0)
-    repeticoes: int | None = Field(default=None, gt=0)
-    observacao: str | None = None
+    exercicio_id: Optional[uuid.UUID] = None
+    series: Optional[int] = Field(default=None, gt=0)
+    repeticoes: Optional[int] = Field(default=None, gt=0)
+    observacao: Optional[str] = None
 
     @field_validator("observacao")
     @classmethod
-    def validar_observacao(cls, value: str | None) -> str | None:
+    def validar_observacao(cls, value: Optional[str]) -> Optional[str]:
         if value is None:
             return None
 
@@ -74,6 +75,6 @@ class ItemTreinoResponse(BaseModel):
     exercicio_id: uuid.UUID
     series: int
     repeticoes: int
-    observacao: str | None
+    observacao: Optional[str] = None
 
     model_config = ConfigDict(from_attributes=True)

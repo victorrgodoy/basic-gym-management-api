@@ -35,8 +35,8 @@ class ExercicioService:
     def update(
         self,
         exercicio_id: uuid.UUID,
-        nome: str | None = None,
-        descricao: str | None = None
+        nome: Optional[str] = None,
+        descricao: Optional[str] = None
     ) -> Exercicio:
         exercicio = self.find_by_id(exercicio_id)
 

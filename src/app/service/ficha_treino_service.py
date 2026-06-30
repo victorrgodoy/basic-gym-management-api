@@ -40,9 +40,9 @@ class FichaTreinoService:
     def update(
         self,
         ficha_treino_id: uuid.UUID,
-        objetivo: str | None = None,
-        aluno_id: uuid.UUID | None = None,
-        instrutor_id: uuid.UUID | None = None
+        objetivo: Optional[str] = None,
+        aluno_id: Optional[uuid.UUID] = None,
+        instrutor_id: Optional[uuid.UUID] = None
     ) -> FichaTreino:
         ficha_treino = self.find_by_id(ficha_treino_id)
 

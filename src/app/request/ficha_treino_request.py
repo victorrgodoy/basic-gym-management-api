@@ -1,7 +1,7 @@
 import uuid
 
 from pydantic import BaseModel, ConfigDict, field_validator, model_validator
-
+from typing import Optional
 
 class FichaTreinoCreateRequest(BaseModel):
     objetivo: str
@@ -23,13 +23,13 @@ class FichaTreinoCreateRequest(BaseModel):
 
 
 class FichaTreinoUpdateRequest(BaseModel):
-    objetivo: str | None = None
-    aluno_id: uuid.UUID | None = None
-    instrutor_id: uuid.UUID | None = None
+    objetivo: Optional[str] = None
+    aluno_id: Optional[uuid.UUID] = None
+    instrutor_id: Optional[uuid.UUID] = None
 
     @field_validator("objetivo")
     @classmethod
-    def validar_objetivo(cls, value: str | None) -> str | None:
+    def validar_objetivo(cls, value: Optional[str]) -> Optional[str]:
         if value is None:
             return value
 

@@ -1,8 +1,6 @@
 ### Funcionalidades
-- [x] Criação da classe base `Usuario`
-- [x] CRUD de Aluno (Gerenciado por Admin)
-- [x] CRUD de Instrutor (Gerenciado por Admin)
-- [ ] Sistema de Login / JWT (Segurança)
+- [x] CRUD de Aluno 
+- [x] CRUD de Instrutor 
 - [ ] ...
 - [ ] ...
 - [ ] ...
