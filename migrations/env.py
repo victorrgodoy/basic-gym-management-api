@@ -1,42 +1,68 @@
-from logging.config import fileConfig
-from sqlalchemy import pool
-from sqlalchemy import create_engine
-from alembic import context
-import sys
 import os
+from dotenv import load_dotenv
+from logging.config import fileConfig
+from sqlalchemy import engine_from_config
+from sqlalchemy import pool
+from alembic import context
 
-sys.path.insert(0, os.path.join(os.path.dirname(__file__), '..', 'src'))
+from app.config.database import Base, DATABASE_URL  
+from app.domain.usuario import Usuario
+from app.domain.aluno import Aluno
+from app.domain.instrutor import Instrutor
+from app.domain.matricula import Matricula
+from app.domain.administrador import Administrador
+from app.domain.exercicio import Exercicio
+from app.domain.ficha_treino import FichaTreino
+from app.domain.item_treino import ItemTreino
+from app.domain.check_in import CheckIn
 
-from app.config.database import Base, DATABASE_URL
-from app.domains.aluno import Aluno  
-
+load_dotenv()
 config = context.config
 
 if config.config_file_name is not None:
     fileConfig(config.config_file_name)
 
-target_metadata = Base.metadata  # ← aponta pro seu Base
-
+target_metadata = Base.metadata 
 
 def run_migrations_offline() -> None:
+    config.set_main_option("sqlalchemy.url", os.getenv("DATABASE_URL"))
+
+    connectable = engine_from_config(
+        config.get_section(config.config_ini_section, {}),
+        prefix="sqlalchemy.",
+        poolclass=pool.NullPool,
+    )
+    """Run migrations in 'offline' mode."""
+    url = DATABASE_URL 
     context.configure(
-        url=DATABASE_URL,
+        url=url,
         target_metadata=target_metadata,
         literal_binds=True,
         dialect_opts={"paramstyle": "named"},
     )
+
     with context.begin_transaction():
         context.run_migrations()
 
 
 def run_migrations_online() -> None:
-    connectable = create_engine(DATABASE_URL, poolclass=pool.NullPool)
+    """Run migrations in 'online' mode."""
+    
+    configuration = config.get_section(config.config_ini_section, {})
+    
+    configuration["sqlalchemy.url"] = DATABASE_URL
+
+    connectable = engine_from_config(
+        configuration,
+        prefix="sqlalchemy.",
+        poolclass=pool.NullPool,
+    )
 
     with connectable.connect() as connection:
         context.configure(
-            connection=connection,
-            target_metadata=target_metadata,
+            connection=connection, target_metadata=target_metadata
         )
+
         with context.begin_transaction():
             context.run_migrations()
 

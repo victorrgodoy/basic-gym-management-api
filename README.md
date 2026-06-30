@@ -1,4 +1,14 @@
 # Basic Gym Management API
+Esta API foi desenvolvida para gerenciar o fluxo operacional de uma academia, cobrindo desde o controle de acessos (Alunos, Instrutores, Admins) até o mapeamento de treinos e check-ins.
+
+## Modelo de Domínio
+
+O design da arquitetura e o relacionamento entre as entidades seguem o diagrama de classes mapeado em:
+> `docs/modelo.jpeg`
+
+---
+
+## Rodar o projeto
 
 ## Requisitos
 - Python 3.9+
@@ -20,24 +30,12 @@ pip install --upgrade pip
 pip install -r requirements.txt
 ```
 
-
 ### 3. Configurar variáveis de ambiente
-Crie um arquivo `.env` na raiz do projeto:
-```env```
-<br>
-<br>
-Linux:
-```bash
-cp .env.example .env
-```
-Windows:
-```bash
-copy .env.example .env
-```
+Crie um arquivo `.env` na raiz do projeto com base .env.example:
 
 ### 4. Subir o banco de dados
 ```bash
-docker compose up -d
+docker-compose up -d
 ```
 
 ### 5. Rodar as migrations
@@ -45,7 +43,13 @@ docker compose up -d
 alembic upgrade head
 ```
 
-### 6. Iniciar o servidor
+### 6. Popular o banco com dados iniciais
+```bash
+python3 src/seed.py
+```
+Esse comando limpa os dados existentes das tabelas da aplicação e recria os registros de exemplo.
+
+### 7. Iniciar o servidor
 ```bash
 uvicorn src.main:app --reload
 ```

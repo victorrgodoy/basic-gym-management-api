@@ -2,6 +2,7 @@
 fastapi==0.128.8
 sqlalchemy==2.0.38
 uvicorn==0.34.0
-psycopg[binary]==3.2.4
+psycopg[binary]>=3.2.10
 python-dotenv==1.1.0
 alembic==1.14.0
+email-validator>=2.0.0
