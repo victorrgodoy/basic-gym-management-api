@@ -18,7 +18,7 @@ O design da arquitetura e o relacionamento entre as entidades seguem o diagrama 
 
 ### 1. Clonar o projeto
 ```bash
-git clone <url-do-repo>
+git clone https://github.com/victorrgodoy/basic-gym-management-api.git
 cd basic-gym-management-api
 ```
 
