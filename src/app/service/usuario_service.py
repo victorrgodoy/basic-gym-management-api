@@ -2,6 +2,8 @@ from app.repository.usuario_repository import UsuarioRepository
 import uuid
 from app.domain.usuario import Usuario
 from typing import Optional
+from app.request.administrador_request import AdministradorUpdate
+from app.request.instrutor_request import InstrutorUpdate
 
 class UsuarioService:
     def __init__(self, usuario_repository: UsuarioRepository):
@@ -39,4 +41,15 @@ class UsuarioService:
         if not usuario:
             raise ValueError("Usuário não encontrado.")
         self.__usuario_repository.delete(id)
-    
+
+    def update_administrador(self, id: uuid.UUID, dados: AdministradorUpdate) -> Optional[Usuario]:
+        admin = self.find_by_id(id)
+        if not admin or admin.tipo != "administrador":
+            raise ValueError("Administrador não encontrado.")
+        
+        admin.nome = dados.nome
+        admin.email = dados.email
+        if dados.senha:
+            admin.senha = dados.senha
+
+        return self.__usuario_repository.update(admin)
