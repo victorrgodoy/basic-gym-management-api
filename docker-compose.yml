@@ -7,9 +7,9 @@ services:
       POSTGRES_USER: ${DATABASE_USER}
       POSTGRES_DB: ${DATABASE_NAME}
     ports:
-      - '5432:5432'
+      - '5433:5432'
     volumes:
-      - basic_gym_data:/var/lib/postgresql
+      - basic_gym_data:/var/lib/postgresql/data
     healthcheck:
       test: ["CMD-SHELL", "pg_isready -U ${DATABASE_USER} -d ${DATABASE_NAME}"]
       interval: 5s
