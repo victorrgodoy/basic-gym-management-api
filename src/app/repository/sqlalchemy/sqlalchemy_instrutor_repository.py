@@ -13,7 +13,7 @@ class SqlAlchemyInstrutorRepository(InstrutorRepository):
         return self.__db.query(Instrutor).filter(Instrutor.id == id).first()
 
     def find_by_cref(self, cref: str) -> Optional[Instrutor]:
-        return self.__db.query(Instrutor).filter(Instrutor.cref == cref).first() 
+        return self.__db.query(Instrutor).filter(Instrutor.cref == cref).first()
 
     def create(self, instrutor: Instrutor) -> Instrutor:
         self.__db.add(instrutor)
