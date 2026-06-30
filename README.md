@@ -26,10 +26,14 @@ Crie um arquivo `.env` na raiz do projeto:
 ```env```
 <br>
 <br>
-Linux, macOS ou Windows: ```cp .env.example .env```
-
-Windows: ```copy .env.example .env```
-
+Linux:
+```bash
+cp .env.example .env
+```
+Windows:
+```bash
+copy .env.example .env
+```
 
 ### 4. Subir o banco de dados
 ```bash
