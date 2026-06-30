@@ -20,11 +20,8 @@ class SqlAlchemyUsuarioRepository(UsuarioRepository):
         self.__db.refresh(usuario)
         return usuario
     
-    def read(self, tipo: Optional[str] = None) -> list[Usuario]:
-        query = self.__db.query(Usuario)
-        if tipo:
-            query = query.filter(Usuario.tipo == tipo)
-        return query.all()
+    def read(self) -> list[Usuario]:
+        return self.__db.query(Usuario).all()
     
     def update(self, usuario: Usuario) -> Usuario:
         usuario_atualizado = self.__db.merge(usuario)
@@ -34,12 +31,5 @@ class SqlAlchemyUsuarioRepository(UsuarioRepository):
 
     def delete(self, usuario_id: uuid.UUID) -> None: 
         usuario = self.__db.query(Usuario).filter(Usuario.id == usuario_id).first()
-        if usuario:
-            self.__db.delete(usuario)
-            self.__db.commit()
-
-    def get_by_id(self, id: UUID) -> Optional[Usuario]:
-        return self.__db.query(Usuario).filter(Usuario.id == id).first()
-    
-    def commit(self) -> None:
+        self.__db.delete(usuario)
         self.__db.commit()

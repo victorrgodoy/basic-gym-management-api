@@ -20,14 +20,14 @@ def registrar_check_in(request: CheckInRequest, db: Session = Depends(get_db)):
         raise HTTPException(status_code=status.HTTP_400_BAD_REQUEST, detail=str(e))
 
 @router.get("/")
-def listar_check_ins(db: Session = Depends(get_db)):
+def read(db: Session = Depends(get_db)):
     check_in_repo = SqlAlchemyCheckInRepository(db)
     usuario_repo = SqlAlchemyUsuarioRepository(db)
     service = CheckInService(check_in_repo, usuario_repo)
     return service.read_all()
 
 @router.get("/aluno/{aluno_id}")
-def listar_check_ins_por_aluno(aluno_id: UUID, db: Session = Depends(get_db)):
+def read_by_aluno(aluno_id: UUID, db: Session = Depends(get_db)):
     check_in_repo = SqlAlchemyCheckInRepository(db)
     usuario_repo = SqlAlchemyUsuarioRepository(db)
     service = CheckInService(check_in_repo, usuario_repo)

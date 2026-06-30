@@ -1,36 +1,29 @@
 from fastapi import APIRouter, Depends, HTTPException, status
 from sqlalchemy.orm import Session
 from app.config.database import get_db
-from app.domain.instrutor import Instrutor
-from app.request.instrutor_request import InstrutorRequest
-from app.service.instrutor_service import InstrutorService
+from app.domain.administrador import Administrador
+from app.request.administrador_request import AdministradorRequest
 from app.service.usuario_service import UsuarioService
-from app.repository.sqlalchemy.sqlalchemy_instrutor_repository import SqlAlchemyInstrutorRepository
 from app.repository.sqlalchemy.sqlalchemy_usuario_repository import SqlAlchemyUsuarioRepository
 from uuid import UUID
 from fastapi import APIRouter, Depends, HTTPException, status
-from app.request.instrutor_request import InstrutorUpdate
+from app.request.administrador_request import AdministradorUpdate
 
-router = APIRouter(prefix="/instrutores", tags=["Instrutores"])
-
+router = APIRouter(prefix="/administradores", tags=["Administradores"])
 
 @router.post("/", status_code=status.HTTP_201_CREATED)
-def criar_instrutor(request: InstrutorRequest, db: Session = Depends(get_db)):
+def create(request: AdministradorRequest, db: Session = Depends(get_db)):
     try:
-        instrutor_repo = SqlAlchemyInstrutorRepository(db)
         usuario_repo = SqlAlchemyUsuarioRepository(db)
+        service = UsuarioService(usuario_repo)
         
-        usuario_service = UsuarioService(usuario_repo)
-        service = InstrutorService(instrutor_repo, usuario_service)
-        
-        novo_instrutor = Instrutor(
+        novo_admin = Administrador(
             nome=request.nome,
             email=request.email,
-            senha=request.senha,
-            cref=request.cref
+            senha=request.senha
         )
         
-        return service.create(novo_instrutor)
+        return service.create(novo_admin)
         
     except ValueError as e:
         raise HTTPException(
@@ -40,25 +33,22 @@ def criar_instrutor(request: InstrutorRequest, db: Session = Depends(get_db)):
 
 
 @router.get("/")
-def listar_instrutores(db: Session = Depends(get_db)):
-    instrutor_repo = SqlAlchemyInstrutorRepository(db)
+def read(db: Session = Depends(get_db)):
     usuario_repo = SqlAlchemyUsuarioRepository(db)
-    usuario_service = UsuarioService(usuario_repo)
-    
-    service = InstrutorService(instrutor_repo, usuario_service)
-    return service.read()
+    service = UsuarioService(usuario_repo)
+    return service.read(tipo="administrador")
 
 @router.put("/{id}", response_model=None)
-def atualizar_instrutor(id: UUID, dados: InstrutorUpdate, db: Session = Depends(get_db)):
+def update(id: UUID, dados: AdministradorUpdate, db: Session = Depends(get_db)):
     try:
         usuario_repo = SqlAlchemyUsuarioRepository(db)
         service = UsuarioService(usuario_repo)
-        return service.update_instrutor(id, dados)
+        return service.update_administrador(id, dados)
     except ValueError as e:
         raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail=str(e))
 
 @router.delete("/{id}", status_code=status.HTTP_204_NO_CONTENT)
-def deletar_instrutor(id: UUID, db: Session = Depends(get_db)):
+def delete(id: UUID, db: Session = Depends(get_db)):
     try:
         usuario_repo = SqlAlchemyUsuarioRepository(db)
         service = UsuarioService(usuario_repo)

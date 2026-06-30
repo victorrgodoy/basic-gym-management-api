@@ -53,17 +53,3 @@ class UsuarioService:
             admin.senha = dados.senha
 
         return self.__usuario_repository.update(admin)
-
-    def update_instrutor(self, id: uuid.UUID, dados: InstrutorUpdate) -> Optional[Usuario]:
-        instrutor = self.find_by_id(id)
-        if not instrutor or instrutor.tipo != "instrutor":
-            raise ValueError("Instrutor não encontrado.")
-        
-        instrutor.nome = dados.nome
-        instrutor.email = dados.email
-        instrutor.cref = dados.cref
-        if dados.senha:
-            instrutor.senha = dados.senha
-
-        return self.__usuario_repository.update(instrutor)
-    
