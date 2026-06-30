@@ -24,11 +24,9 @@ pip install -r requirements.txt
 ### 3. Configurar variáveis de ambiente
 Crie um arquivo `.env` na raiz do projeto:
 ```env
-DATABASE_USER=user
-DATABASE_PASSWORD=password
-DATABASE_NAME=basic_gym_management
-DATABASE_HOST=localhost
-DATABASE_PORT=5433
+Linux, macOS ou Windows (PowerShell): cp .env.example .env
+
+Windows (Prompt de Comando - CMD): copy .env.example .env
 ```
 
 ### 4. Subir o banco de dados
