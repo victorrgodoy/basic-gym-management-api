@@ -18,8 +18,6 @@ class AdministradorService:
             raise ValueError("Administrador não pode ser nulo.")
         if self.__usuario_service.find_by_email(administrador.email):
             raise ValueError("Administrador com esse email já existe.")
-        if self.find_by_cpf(administrador.cpf):
-            raise ValueError("Administrador com esse CPF já existe.")
         return self.__administrador_repository.create(administrador)
 
     def read(self) -> list[Administrador]:
@@ -30,11 +28,11 @@ class AdministradorService:
         if not administrador:
             raise ValueError("Administrador não encontrado.")
         if dados.nome is not None:
-            administrador.alterar_nome(dados.nome)
+            administrador.nome = dados.nome
         if dados.email is not None:
-            administrador.alterar_email(dados.email)
+            administrador.email = dados.email
         if dados.senha is not None:
-            administrador.alterar_senha(dados.senha)
+            administrador.senha = dados.senha
         return self.__usuario_service.update(administrador)
 
     def delete(self, administrador_id: uuid.UUID) -> None:
