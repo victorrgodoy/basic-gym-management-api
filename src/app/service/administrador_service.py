@@ -18,7 +18,7 @@ class AdministradorService:
             raise ValueError("Administrador não pode ser nulo.")
         if self.__usuario_service.find_by_email(administrador.email):
             raise ValueError("Administrador com esse email já existe.")
-        if self.find_by_cpf(administrador.cpf):
+        if self.__administrador_repository.find_by_cpf(administrador.cpf):
             raise ValueError("Administrador com esse CPF já existe.")
         return self.__administrador_repository.create(administrador)
 

@@ -20,6 +20,7 @@ def service(repo_mock, user_service_mock):
 def test_should_create_administrator_successfully(service, repo_mock, user_service_mock):
     admin_mock = MagicMock()
     user_service_mock.find_by_email.return_value = None
+    repo_mock.find_by_cpf.return_value = None
     repo_mock.create.return_value = admin_mock
     
     res = service.create(admin_mock)
